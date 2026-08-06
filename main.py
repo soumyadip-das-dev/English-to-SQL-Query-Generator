@@ -24,6 +24,25 @@ def generate_sql():
     )
 
     print("Generated SQL: \n", response.text)
+def show_menu():
+    print("\n" + "=" * 50)
+    print(" English to SQL Generator ")
+    print("=" * 50)
+    print("1. Generate SQL")
+    print("2. Exit")
 
+def main():
+    while True:
+        show_menu()
+        choice = input("\nEnter your choice: ")
 
-generate_sql()
+        if choice == "1":
+            generate_sql()
+        elif choice == "2":
+            print("\nThank you for using English to SQL Generator.")
+            break
+        else:
+            print("\nInvalid choice. Please try again.")
+            
+if __name__ == "__main__":
+    main()
