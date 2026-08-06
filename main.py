@@ -1,48 +1,74 @@
-# import libraries
+# Import libraries
 from google import genai
 from dotenv import load_dotenv
 import os
 
-# variables
+# Load environment variables
 load_dotenv()
 
 API_KEY = os.getenv("GEMINI_API_KEY")
 MODEL_NAME = os.getenv("MODEL_NAME")
 
+# Create Gemini Client
 client = genai.Client(api_key=API_KEY)
 
 
 def generate_sql():
-    query = input("Enter Your English Query: ")
+    """Generates SQL query from English input."""
 
-    response = client.models.generate_content(
-        model=MODEL_NAME,
-        contents=f"""
-        Convert the following English sentence into an SQL query.
-        English: {query}
-        """
-    )
+    query = input("\nEnter Your English Query: ").strip()
 
-    print("Generated SQL: \n", response.text)
-def show_menu():
-    print("\n" + "=" * 50)
-    print(" English to SQL Generator ")
-    print("=" * 50)
-    print("1. Generate SQL")
-    print("2. Exit")
+    if not query:
+        print("\nPlease enter a valid query.")
+        return
+
+    try:
+        response = client.models.generate_content(
+            model=MODEL_NAME,
+            contents=f"""
+Convert the following English sentence into an SQL query.
+
+Rules:
+- Return only the SQL query.
+- Do not explain anything.
+- Do not use Markdown.
+- Do not use code blocks.
+
+English:
+{query}
+"""
+        )
+
+        sql = response.text.strip()
+        sql = sql.replace("```sql", "")
+        sql = sql.replace("```", "").strip()
+
+        print("\nGenerated SQL:\n")
+        print(sql)
+
+    except Exception as e:
+        print(f"\nError: {e}")
+
 
 def main():
-    while True:
-        show_menu()
-        choice = input("\nEnter your choice: ")
+    """Main function of the application."""
 
-        if choice == "1":
-            generate_sql()
-        elif choice == "2":
-            print("\nThank you for using English to SQL Generator.")
+    print("=" * 50)
+    print("        English to SQL Generator")
+    print("=" * 50)
+    print(" Convert English into SQL using Gemini LLM")
+    print("=" * 50)
+
+    while True:
+
+        generate_sql()
+
+        choice = input("\nGenerate another SQL query? (y/n): ").strip().lower()
+
+        if choice != "y":
+            print("\nThank you for using English to SQL Generator!")
             break
-        else:
-            print("\nInvalid choice. Please try again.")
-            
+
+
 if __name__ == "__main__":
     main()
