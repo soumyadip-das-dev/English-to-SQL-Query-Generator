@@ -1,22 +1,35 @@
 # English-to-SQL Generator using Gemini LLM
 
-A simple Python application that converts natural language (English) queries into SQL using Google's Gemini Large Language Model (LLM).
+Convert natural language (English) into SQL queries using Google's Gemini Large Language Model (LLM).
+
+---
 
 ## Overview
 
-This project demonstrates how an LLM can understand a user's English query and generate the corresponding SQL statement. It is built as a beginner-friendly project with minimal code and no web framework.
+English-to-SQL Generator is a simple Python command-line application that demonstrates how Large Language Models (LLMs) can translate English instructions into SQL queries.
+
+The application accepts an English query from the user, sends it to the Gemini API, and displays the generated SQL query in the terminal.
+
+This project focuses on understanding LLM integration, prompt engineering, and clean Python programming while keeping the implementation minimal and easy to understand.
+
+---
 
 ## Features
 
 - Convert English queries into SQL
-- Uses Google's Gemini LLM
-- Simple command-line interface
-- Minimal and easy-to-understand code
-- Environment variables for secure API key management
+- Powered by Google Gemini LLM
+- Simple command-line interface (CLI)
+- Menu-driven interaction
+- Generate multiple SQL queries in one session
+- Input validation
+- Removes Markdown formatting from generated SQL
+- Secure API key management using `.env`
+
+---
 
 ## Project Structure
 
-```
+```text
 english-to-sql-generator/
 │
 ├── main.py
@@ -26,22 +39,47 @@ english-to-sql-generator/
 └── README.md
 ```
 
+---
+
+## Workflow
+
+```text
+User
+   │
+   ▼
+Enter English Query
+   │
+   ▼
+Python Application
+   │
+   ▼
+Gemini API
+   │
+   ▼
+Generated SQL
+   │
+   ▼
+Display SQL
+```
+
+---
+
 ## Installation
 
-### 1. Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/english-to-sql-generator.git
 cd english-to-sql-generator
 ```
 
-### 2. Create a virtual environment
+### Create a virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate it:
+### Activate the virtual environment
 
 **Windows**
 
@@ -49,38 +87,44 @@ Activate it:
 venv\Scripts\activate
 ```
 
-### 3. Install dependencies
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure the API key
+---
 
-Create a `.env` file.
+## Environment Variables
+
+Create a `.env` file in the project root.
 
 ```env
 GEMINI_API_KEY=YOUR_API_KEY
 MODEL_NAME=models/gemini-3.6-flash
 ```
 
-## Usage
+---
 
-Run the application:
+## Run the Application
 
 ```bash
 python main.py
 ```
 
-Example:
+---
 
-```
+## Example
+
+### Input
+
+```text
 Enter Your English Query:
 
 Show all employees whose salary is greater than 50000.
 ```
 
-Output:
+### Output
 
 ```sql
 SELECT *
@@ -88,13 +132,63 @@ FROM employees
 WHERE salary > 50000;
 ```
 
+---
+
 ## Technologies Used
 
 - Python
 - Google Gemini API
-- google-genai
+- Google Gen AI SDK (`google-genai`)
 - python-dotenv
+
+---
+
+## Learning Outcomes
+
+This project helped me understand:
+
+- Large Language Model (LLM) integration
+- Prompt engineering
+- Environment variables using `.env`
+- API communication in Python
+- Function-based programming
+- Clean and modular code
+- Git & GitHub version control
+
+---
+
+## Current Version
+
+**Version:** `v1.0.0-beta`
+
+### Completed
+
+- English → SQL conversion
+- Gemini API integration
+- Interactive CLI
+- Input validation
+- Multiple query generation
+
+---
+
+## Future Improvements
+
+- Streamlit web interface
+- SQL syntax highlighting
+- Copy generated SQL
+- Database schema-aware SQL generation
+- Database connectivity and SQL execution
+
+---
 
 ## Author
 
 **Soumyadip Das**
+
+B.Tech CSE (AI & ML)
+
+---
+
+## License
+
+This project is licensed under the MIT License.
